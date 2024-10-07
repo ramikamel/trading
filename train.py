@@ -25,7 +25,7 @@ if __name__ == "__main__":
     action_size = 3  # Buy, Sell, Hold
     agent = DQNAgent(state_size, action_size)
 
-    episodes = 10
+    episodes = 100
     for e in range(episodes):
         print(f"Episode: {e}/{episodes}")
         state = env.reset()
