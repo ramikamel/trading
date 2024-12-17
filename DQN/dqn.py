@@ -9,9 +9,9 @@ class DQN(nn.Module):
     """Deep Q-Network."""
     def __init__(self, state_size, action_size):
         super(DQN, self).__init__()
-        self.fc1 = nn.Linear(state_size, 24)
-        self.fc2 = nn.Linear(24, 24)
-        self.fc3 = nn.Linear(24, action_size)
+        self.fc1 = nn.Linear(state_size, 64)
+        self.fc2 = nn.Linear(64, 64)
+        self.fc3 = nn.Linear(64, action_size)
 
     def forward(self, x):
         """Forward pass through the network."""
@@ -28,7 +28,7 @@ class DQNAgent:
         self.gamma = 0.95  # Discount rate
         self.epsilon = 1.0  # Exploration rate
         self.epsilon_min = 0.01
-        self.epsilon_decay = 0.995
+        self.epsilon_decay = 0.999
         self.model = DQN(state_size, action_size)
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         self.criterion = nn.MSELoss()
@@ -72,7 +72,7 @@ class DQNAgent:
             self.optimizer.step()
 
         # Print the average loss for this batch
-        #print(f"Average Loss: {total_loss / batch_size:.4f}")
+        # print(f"Average Loss: {total_loss / batch_size:.4f}")
 
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
